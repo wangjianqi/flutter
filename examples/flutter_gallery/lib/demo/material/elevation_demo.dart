@@ -13,6 +13,7 @@ class _ElevationDemoState extends State<ElevationDemo> {
   bool _showElevation = true;
 
   List<Widget> buildCards() {
+    ///const修饰
     const List<double> elevations = <double>[
       0.0,
       1.0,
@@ -34,6 +35,7 @@ class _ElevationDemoState extends State<ElevationDemo> {
             height: 100.0,
             width: 100.0,
             child: Center(
+              ///不保留小数
               child: Text('${elevation.toStringAsFixed(0)} pt'),
             ),
           ),

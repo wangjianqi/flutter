@@ -558,6 +558,7 @@ List<GalleryDemo> _buildGalleryDemos() {
   return galleryDemos;
 }
 
+///数据源
 final List<GalleryDemo> kAllGalleryDemos = _buildGalleryDemos();
 
 final Set<GalleryDemoCategory> kAllGalleryDemoCategories =
@@ -573,6 +574,7 @@ final Map<GalleryDemoCategory, List<GalleryDemo>> kGalleryCategoryToDemos =
 
 final Map<String, String> kDemoDocumentationUrl =
     Map<String, String>.fromIterable(
+      ///where: 类型
       kAllGalleryDemos.where((GalleryDemo demo) => demo.documentationUrl != null),
       key: (dynamic demo) => demo.routeName,
       value: (dynamic demo) => demo.documentationUrl,

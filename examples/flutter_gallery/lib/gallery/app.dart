@@ -69,6 +69,7 @@ class _GalleryAppState extends State<GalleryApp> {
       timeDilation: timeDilation,
       platform: defaultTargetPlatform,
     );
+    ///加载数据
     model = AppStateModel()..loadProducts();
   }
 

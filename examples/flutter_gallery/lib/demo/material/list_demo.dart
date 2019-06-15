@@ -47,9 +47,11 @@ class _ListDemoState extends State<ListDemo> {
     setState(() {
       _itemType = type;
     });
+    ///只更新bottomSheet
     _bottomSheet?.setState(() { });
   }
 
+  ///底部弹框
   void _showConfigurationSheet() {
     final PersistentBottomSheetController<void> bottomSheet = scaffoldKey.currentState.showBottomSheet<void>((BuildContext bottomSheetContext) {
       return Container(
@@ -64,6 +66,7 @@ class _ListDemoState extends State<ListDemo> {
               child: ListTile(
                 dense: true,
                 title: const Text('One-line'),
+                ///类型
                 trailing: Radio<_MaterialListType>(
                   value: _showAvatars ? _MaterialListType.oneLineWithAvatar : _MaterialListType.oneLine,
                   groupValue: _itemType,
@@ -98,6 +101,7 @@ class _ListDemoState extends State<ListDemo> {
                 dense: true,
                 title: const Text('Show avatar'),
                 trailing: Checkbox(
+                  ///初始值
                   value: _showAvatars,
                   onChanged: (bool value) {
                     setState(() {
@@ -162,7 +166,10 @@ class _ListDemoState extends State<ListDemo> {
       _bottomSheet = bottomSheet;
     });
 
+    ///消失的时候
     _bottomSheet.closed.whenComplete(() {
+      ///判断
+      ///MARK ---:
       if (mounted) {
         setState(() {
           _bottomSheet = null;
@@ -182,11 +189,14 @@ class _ListDemoState extends State<ListDemo> {
     }
     return MergeSemantics(
       child: ListTile(
+        ///三行显示
         isThreeLine: _itemType == _MaterialListType.threeLine,
         dense: _dense,
+        ///头像
         leading: _showAvatars ? ExcludeSemantics(child: CircleAvatar(child: Text(item))) : null,
         title: Text('This item represents $item.'),
         subtitle: secondary,
+        ///disabledColor：不可用颜色
         trailing: _showIcons ? Icon(Icons.info, color: Theme.of(context).disabledColor) : null,
       ),
     );
@@ -209,8 +219,10 @@ class _ListDemoState extends State<ListDemo> {
         break;
     }
 
+    ///可迭代对象
     Iterable<Widget> listTiles = items.map<Widget>((String item) => buildListTile(context, item));
     if (_showDividers)
+      ///MARK ---:
       listTiles = ListTile.divideTiles(context: context, tiles: listTiles);
 
     return Scaffold(
@@ -225,17 +237,20 @@ class _ListDemoState extends State<ListDemo> {
             onPressed: () {
               setState(() {
                 _reverseSort = !_reverseSort;
+                ///排序：正序和倒序
                 items.sort((String a, String b) => _reverseSort ? b.compareTo(a) : a.compareTo(b));
               });
             },
           ),
           IconButton(
             icon: Icon(
+              ///获取平台
               Theme.of(context).platform == TargetPlatform.iOS
                   ? Icons.more_horiz
                   : Icons.more_vert,
             ),
             tooltip: 'Show menu',
+            ///点击之后禁用
             onPressed: _bottomSheet == null ? _showConfigurationSheet : null,
           ),
         ],
@@ -243,6 +258,7 @@ class _ListDemoState extends State<ListDemo> {
       body: Scrollbar(
         child: ListView(
           padding: EdgeInsets.symmetric(vertical: _dense ? 4.0 : 8.0),
+          ///toList
           children: listTiles.toList(),
         ),
       ),

@@ -193,7 +193,9 @@ class FullScreenCodeDialogState extends State<FullScreenCodeDialog> {
 
 class MaterialDemoDocumentationButton extends StatelessWidget {
   MaterialDemoDocumentationButton(String routeName, { Key key })
+  ///给属性赋值
     : documentationUrl = kDemoDocumentationUrl[routeName],
+  ///asset判断：如果条件不为真，异常
       assert(
         kDemoDocumentationUrl[routeName] != null,
         'A documentation URL was not specified for demo route $routeName in kAllGalleryDemos',
@@ -207,6 +209,7 @@ class MaterialDemoDocumentationButton extends StatelessWidget {
     return IconButton(
       icon: const Icon(Icons.library_books),
       tooltip: 'API documentation',
+      ///用webView打开
       onPressed: () => launch(documentationUrl, forceWebView: true),
     );
   }
