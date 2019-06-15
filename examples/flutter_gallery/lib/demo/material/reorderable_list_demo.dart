@@ -56,6 +56,7 @@ class _ListDemoState extends State<ReorderableListDemo> {
       // Trigger a rebuild.
     });
     // Close the bottom sheet to give the user a clear view of the list.
+    ///MARK ---:
     _bottomSheet?.close();
   }
 
@@ -133,9 +134,11 @@ class _ListDemoState extends State<ReorderableListDemo> {
     switch (_itemType) {
       case _ReorderableListType.threeLine:
         listTile = CheckboxListTile(
+          ///设置key
           key: Key(item.value),
           isThreeLine: true,
           value: item.checkState ?? false,
+          ///newValue
           onChanged: (bool newValue) {
             setState(() {
               item.checkState = newValue;
@@ -143,6 +146,7 @@ class _ListDemoState extends State<ReorderableListDemo> {
           },
           title: Text('This item represents ${item.value}.'),
           subtitle: secondary,
+          ///drag
           secondary: const Icon(Icons.drag_handle),
         );
         break;
@@ -162,8 +166,10 @@ class _ListDemoState extends State<ReorderableListDemo> {
     return listTile;
   }
 
+  ///MARK ---:
   void _onReorder(int oldIndex, int newIndex) {
     setState(() {
+      ///更新数据源
       if (newIndex > oldIndex) {
         newIndex -= 1;
       }
@@ -203,6 +209,7 @@ class _ListDemoState extends State<ReorderableListDemo> {
         ],
       ),
       body: Scrollbar(
+        ///MARK ---:可排序的
         child: ReorderableListView(
           header: _itemType != _ReorderableListType.threeLine
               ? Padding(
@@ -210,6 +217,7 @@ class _ListDemoState extends State<ReorderableListDemo> {
                   child: Text('Header of the list', style: Theme.of(context).textTheme.headline))
               : null,
           onReorder: _onReorder,
+          ///反转
           reverse: _reverse,
           scrollDirection: _itemType == _ReorderableListType.horizontalAvatar ? Axis.horizontal : Axis.vertical,
           padding: const EdgeInsets.symmetric(vertical: 8.0),

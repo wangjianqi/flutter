@@ -38,6 +38,7 @@ class VideoCard extends StatelessWidget {
       ),
       body: Center(
         child: AspectRatio(
+          ///宽高比
           aspectRatio: 3 / 2,
           child: Hero(
             tag: controller,
@@ -55,12 +56,15 @@ class VideoCard extends StatelessWidget {
       return _buildFullScreenVideo();
     }
 
+    ///全屏
+    ///MARK ---:
     void pushFullScreenWidget() {
       final TransitionRoute<void> route = PageRouteBuilder<void>(
         settings: RouteSettings(name: title, isInitialRoute: false),
         pageBuilder: fullScreenRoutePageBuilder,
       );
 
+      ///MARK ---:回调
       route.completed.then((void value) {
         controller.setVolume(0.0);
       });
@@ -104,6 +108,7 @@ class _VideoPlayerLoadingState extends State<VideoPlayerLoading> {
     super.initState();
     _initialized = widget.controller.value.initialized;
     widget.controller.addListener(() {
+      ///MARK ---:
       if (!mounted) {
         return;
       }
@@ -126,6 +131,7 @@ class _VideoPlayerLoadingState extends State<VideoPlayerLoading> {
         VideoPlayer(widget.controller),
         const Center(child: CircularProgressIndicator()),
       ],
+      ///expand
       fit: StackFit.expand,
     );
   }
@@ -159,6 +165,7 @@ class _VideoPlayPauseState extends State<VideoPlayPause> {
     controller.addListener(listener);
   }
 
+  ///MARK ---:
   @override
   void deactivate() {
     controller.removeListener(listener);
@@ -177,6 +184,7 @@ class _VideoPlayPauseState extends State<VideoPlayPause> {
             if (!controller.value.initialized) {
               return;
             }
+            ///暂停和开始动画
             if (controller.value.isPlaying) {
               imageFadeAnimation = const FadeAnimation(
                 child: Icon(Icons.pause, size: 100.0),
@@ -274,6 +282,7 @@ class ConnectivityOverlay extends StatefulWidget {
 }
 
 class _ConnectivityOverlayState extends State<ConnectivityOverlay> {
+  ///MARK ---:
   StreamSubscription<ConnectivityResult> connectivitySubscription;
   bool connected = true;
 
@@ -308,6 +317,7 @@ class _ConnectivityOverlayState extends State<ConnectivityOverlay> {
         if (!mounted) {
           return;
         }
+        ///MARK ---:没有网络:可以动态监听
         if (connectivityResult == ConnectivityResult.none) {
           widget.scaffoldKey.currentState.showSnackBar(errorSnackBar);
         } else {
@@ -329,6 +339,7 @@ class _ConnectivityOverlayState extends State<ConnectivityOverlay> {
   Widget build(BuildContext context) => widget.child;
 }
 
+///Demo
 class VideoDemo extends StatefulWidget {
   const VideoDemo({ Key key }) : super(key: key);
 
@@ -340,11 +351,13 @@ class VideoDemo extends StatefulWidget {
 
 final DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
 
+///MARK ---:是否iOS模拟器
 Future<bool> isIOSSimulator() async {
   return Platform.isIOS && !(await deviceInfoPlugin.iosInfo).isPhysicalDevice;
 }
 
 class _VideoDemoState extends State<VideoDemo> with SingleTickerProviderStateMixin {
+  ///播放器
   final VideoPlayerController butterflyController = VideoPlayerController.asset(
     'videos/butterfly.mp4',
     package: 'flutter_gallery_assets',
@@ -368,6 +381,7 @@ class _VideoDemoState extends State<VideoDemo> with SingleTickerProviderStateMix
       controller.setLooping(true);
       controller.setVolume(0.0);
       controller.play();
+      ///MARK ---:
       await connectedCompleter.future;
       await controller.initialize();
       if (mounted) {
@@ -378,6 +392,7 @@ class _VideoDemoState extends State<VideoDemo> with SingleTickerProviderStateMix
 
     initController(butterflyController, 'butterfly');
     initController(beeController, 'bee');
+    ///模拟器不支持
     isIOSSimulator().then<void>((bool result) {
       isSupported = !result;
     });
