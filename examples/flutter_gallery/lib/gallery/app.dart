@@ -22,6 +22,7 @@ import 'updater.dart';
 
 class GalleryApp extends StatefulWidget {
   const GalleryApp({
+    ///可选的
     Key key,
     this.updateUrlFetcher,
     this.enablePerformanceOverlay = true,
@@ -47,6 +48,7 @@ class _GalleryAppState extends State<GalleryApp> {
   Timer _timeDilationTimer;
   AppStateModel model;
 
+  ///路由
   Map<String, WidgetBuilder> _buildRoutes() {
     // For a different example of how to set up an application routing table
     // using named routes, consider the example in the Navigator class documentation:
