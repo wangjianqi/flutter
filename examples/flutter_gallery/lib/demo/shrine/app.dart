@@ -64,13 +64,14 @@ class _ShrineAppState extends State<ShrineApp> with SingleTickerProviderStateMix
     );
   }
 }
-
+///MARK ---:路由
 Route<dynamic> _getRoute(RouteSettings settings) {
   if (settings.name != '/login') {
     return null;
   }
 
   return MaterialPageRoute<void>(
+    ///setting
     settings: settings,
     builder: (BuildContext context) => LoginPage(),
     fullscreenDialog: true,
@@ -82,7 +83,7 @@ final ThemeData _kShrineTheme = _buildShrineTheme();
 IconThemeData _customIconTheme(IconThemeData original) {
   return original.copyWith(color: kShrineBrown900);
 }
-
+///MARK ---:主题
 ThemeData _buildShrineTheme() {
   final ThemeData base = ThemeData.light();
   return base.copyWith(
@@ -106,7 +107,7 @@ ThemeData _buildShrineTheme() {
     iconTheme: _customIconTheme(base.iconTheme),
   );
 }
-
+///MARK ---:主题
 TextTheme _buildShrineTextTheme(TextTheme base) {
   return base.copyWith(
     headline: base.headline.copyWith(fontWeight: FontWeight.w500),

@@ -77,6 +77,7 @@ class _BackdropTitle extends AnimatedWidget {
   @override
   Widget build(BuildContext context) {
     final Animation<double> animation = CurvedAnimation(
+      ///监听
       parent: listenable,
       curve: const Interval(0.0, 0.78),
     );
@@ -124,6 +125,7 @@ class _BackdropTitle extends AnimatedWidget {
                 child: backTitle,
               ),
             ),
+            ///MARK ---:透明度动画
             Opacity(
               opacity: CurvedAnimation(
                 parent: animation,
@@ -276,6 +278,7 @@ class _BackdropState extends State<Backdrop> with SingleTickerProviderStateMixin
       key: _backdropKey,
       children: <Widget>[
         widget.backLayer,
+        ///MARK ---:位置动画
         PositionedTransition(
           rect: _layerAnimation,
           child: _FrontLayer(
@@ -294,6 +297,7 @@ class _BackdropState extends State<Backdrop> with SingleTickerProviderStateMixin
       elevation: 0.0,
       titleSpacing: 0.0,
       title: _BackdropTitle(
+        ///MARK ---:view
         listenable: _controller.view,
         onPress: _toggleBackdropLayerVisibility,
         frontTitle: widget.frontTitle,

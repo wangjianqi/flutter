@@ -30,7 +30,9 @@ class ProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ///MARK ---:NumberFormat
     final NumberFormat formatter = NumberFormat.simpleCurrency(
+      ///小数位
       decimalDigits: 0,
       locale: Localizations.localeOf(context).toString(),
     );
@@ -58,6 +60,7 @@ class ProductCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
+              ///MARK ---:AspectRatio
               AspectRatio(
                 aspectRatio: imageAspectRatio,
                 child: imageWidget,
@@ -78,6 +81,7 @@ class ProductCard extends StatelessWidget {
                     ),
                     const SizedBox(height: 4.0),
                     Text(
+                      ///MARK ---:format
                       product == null ? '' : formatter.format(product.price),
                       style: theme.textTheme.caption,
                     ),

@@ -49,6 +49,7 @@ class CategoryMenuPage extends StatelessWidget {
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 14.0),
+                    ///指示线
                     Container(
                       width: 70.0,
                       height: 2.0,

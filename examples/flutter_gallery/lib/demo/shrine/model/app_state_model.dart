@@ -71,6 +71,7 @@ class AppStateModel extends Model {
   }
 
   // Adds a product to the cart.
+  ///MARK ---:添加
   void addProductToCart(int productId) {
     if (!_productsInCart.containsKey(productId)) {
       _productsInCart[productId] = 1;

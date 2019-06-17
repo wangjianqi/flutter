@@ -43,6 +43,7 @@ class ShortAppBar extends StatelessWidget {
       child: Material(
         color: Theme.of(context).colorScheme.surface,
         elevation: 4,
+        ///MARK ---:矩形三角形圆角
         shape: const BeveledRectangleBorder(
           borderRadius: BorderRadius.only(bottomRight: Radius.circular(22)),
         ),
@@ -88,12 +89,14 @@ class FruitPage extends StatelessWidget {
 
     return SingleChildScrollView(
       child: SafeArea(
+        ///top
         top: false,
         child: Container(
           color: Theme.of(context).colorScheme.surface,
           child: Column(
             children: <Widget>[
               Container(
+                ///设置高度
                 constraints: const BoxConstraints.expand(height: 248),
                 child: Image.asset(
                   'food/fruits.png',
@@ -127,6 +130,7 @@ class FruitPage extends StatelessWidget {
                     const SizedBox(height: 10),
                     Text(
                       'Quince for Wisdom, Persimmon for Luck, Pomegranate for Love',
+                      ///样式
                       style: textTheme.display1,
                     ),
                     const SizedBox(height: 10),
@@ -139,6 +143,7 @@ class FruitPage extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(vertical: 16),
                       child: Row(
                         children: <Widget>[
+                          ///MARK ---:设置头像
                           CircleAvatar(
                             backgroundImage: ExactAssetImage(
                               'people/square/trevor.png',
@@ -180,7 +185,7 @@ class FruitPage extends StatelessWidget {
 }
 
 final ThemeData _fortnightlyTheme = _buildFortnightlyTheme();
-
+///MARK ---:theme
 ThemeData _buildFortnightlyTheme() {
   final ThemeData base = ThemeData.light();
   return base.copyWith(

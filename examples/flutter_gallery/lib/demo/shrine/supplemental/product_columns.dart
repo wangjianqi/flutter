@@ -27,9 +27,11 @@ class TwoProductCardColumn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ///MARK ---:LayoutBuilder
     return LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
       const double spacerHeight = 44.0;
 
+      ///MARK ---:biggest
       final double heightOfCards = (constraints.biggest.height - spacerHeight) / 2.0;
       final double heightOfImages = heightOfCards - ProductCard.kTextBoxHeight;
       final double imageAspectRatio = (heightOfImages >= 0.0 && constraints.biggest.width > heightOfImages)

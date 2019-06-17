@@ -33,12 +33,15 @@ class _LoginPageState extends State<LoginPage> {
         backgroundColor: Colors.white,
         brightness: Brightness.light,
         leading: IconButton(
+          ///MARK ---:返回图标
           icon: const BackButtonIcon(),
+          ///MARK ---:tooltip
           tooltip: MaterialLocalizations.of(context).backButtonTooltip,
           onPressed: () {
             // The login screen is immediately displayed on top of the Shrine
             // home screen using onGenerateRoute and so rootNavigator must be
             // set to true in order to get out of Shrine completely.
+            ///MARK ---:rootNavigator
             Navigator.of(context, rootNavigator: true).pop();
           },
         ),
@@ -98,6 +101,7 @@ class _LoginPageState extends State<LoginPage> {
                     RaisedButton(
                       child: const Text('NEXT'),
                       elevation: 8.0,
+                      ///MARK ---:切三角
                       shape: const BeveledRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(7.0)),
                       ),
@@ -115,7 +119,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 }
-
+///MARK ---:设置颜色
 class PrimaryColorOverride extends StatelessWidget {
   const PrimaryColorOverride({Key key, this.color, this.child}) : super(key: key);
 

@@ -23,6 +23,7 @@ class AsymmetricView extends StatelessWidget {
   final List<Product> products;
 
   List<Container> _buildColumns(BuildContext context) {
+    ///MARK ---:判空
     if (products == null || products.isEmpty) {
       return const <Container>[];
     }
@@ -89,6 +90,7 @@ class AsymmetricView extends StatelessWidget {
       scrollDirection: Axis.horizontal,
       padding: const EdgeInsets.fromLTRB(0.0, 34.0, 16.0, 44.0),
       children: _buildColumns(context),
+      ///MARK ---:
       physics: const AlwaysScrollableScrollPhysics(),
     );
   }
