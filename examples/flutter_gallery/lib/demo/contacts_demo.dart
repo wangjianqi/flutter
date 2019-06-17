@@ -17,6 +17,7 @@ class _ContactCategory extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 16.0),
       decoration: BoxDecoration(
+        ///分割线
         border: Border(bottom: BorderSide(color: themeData.dividerColor))
       ),
       child: DefaultTextStyle(
@@ -27,6 +28,7 @@ class _ContactCategory extends StatelessWidget {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
+              ///固定宽度
               Container(
                 padding: const EdgeInsets.symmetric(vertical: 24.0),
                 width: 72.0,
@@ -43,8 +45,9 @@ class _ContactCategory extends StatelessWidget {
 
 class _ContactItem extends StatelessWidget {
   _ContactItem({ Key key, this.icon, this.lines, this.tooltip, this.onPressed })
-    : assert(lines.length > 1),
-      super(key: key);
+  ///asset
+      : assert(lines.length > 1),
+        super(key: key);
 
   final IconData icon;
   final List<String> lines;
@@ -54,6 +57,7 @@ class _ContactItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData themeData = Theme.of(context);
+    ///MARK ---:sublist
     final List<Widget> columnChildren = lines.sublist(0, lines.length - 1).map<Widget>((String line) => Text(line)).toList();
     columnChildren.add(Text(lines.last, style: themeData.textTheme.caption));
 
@@ -67,6 +71,7 @@ class _ContactItem extends StatelessWidget {
     ];
     if (icon != null) {
       rowChildren.add(SizedBox(
+        ///设置宽度
         width: 72.0,
         child: IconButton(
           icon: Icon(icon),
@@ -87,6 +92,7 @@ class _ContactItem extends StatelessWidget {
   }
 }
 
+///demo
 class ContactsDemo extends StatefulWidget {
   static const String routeName = '/contacts';
 
@@ -108,16 +114,22 @@ class ContactsDemoState extends State<ContactsDemo> {
       data: ThemeData(
         brightness: Brightness.light,
         primarySwatch: Colors.indigo,
+        ///MARK ---:平台
         platform: Theme.of(context).platform,
       ),
       child: Scaffold(
         key: _scaffoldKey,
+        ///MARK ---:
         body: CustomScrollView(
           slivers: <Widget>[
+            ///MARK ---:SliverAppBar
             SliverAppBar(
+              ///高度
               expandedHeight: _appBarHeight,
+              ///固定的
               pinned: _appBarBehavior == AppBarBehavior.pinned,
               floating: _appBarBehavior == AppBarBehavior.floating || _appBarBehavior == AppBarBehavior.snapping,
+              ///滑动的效果
               snap: _appBarBehavior == AppBarBehavior.snapping,
               actions: <Widget>[
                 IconButton(
@@ -129,6 +141,7 @@ class ContactsDemoState extends State<ContactsDemo> {
                     ));
                   },
                 ),
+                ///类型
                 PopupMenuButton<AppBarBehavior>(
                   onSelected: (AppBarBehavior value) {
                     setState(() {
@@ -141,10 +154,12 @@ class ContactsDemoState extends State<ContactsDemo> {
                       child: Text('App bar scrolls away'),
                     ),
                     const PopupMenuItem<AppBarBehavior>(
+                      ///固定的
                       value: AppBarBehavior.pinned,
                       child: Text('App bar stays put'),
                     ),
                     const PopupMenuItem<AppBarBehavior>(
+                      ///浮动的
                       value: AppBarBehavior.floating,
                       child: Text('App bar floats'),
                     ),
@@ -155,6 +170,7 @@ class ContactsDemoState extends State<ContactsDemo> {
                   ],
                 ),
               ],
+              ///MARK ---:space
               flexibleSpace: FlexibleSpaceBar(
                 title: const Text('Ali Connors'),
                 background: Stack(
@@ -164,6 +180,7 @@ class ContactsDemoState extends State<ContactsDemo> {
                       'people/ali_landscape.png',
                       package: 'flutter_gallery_assets',
                       fit: BoxFit.cover,
+                      ///设置高度
                       height: _appBarHeight,
                     ),
                     // This gradient ensures that the toolbar icons are distinct
@@ -171,7 +188,9 @@ class ContactsDemoState extends State<ContactsDemo> {
                     const DecoratedBox(
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
+                          ///开始位置
                           begin: Alignment(0.0, -1.0),
+                          ///结束位置
                           end: Alignment(0.0, -0.4),
                           colors: <Color>[Color(0x60000000), Color(0x00000000)],
                         ),
@@ -181,8 +200,10 @@ class ContactsDemoState extends State<ContactsDemo> {
                 ),
               ),
             ),
+            ///MARK ---:SliverList
             SliverList(
               delegate: SliverChildListDelegate(<Widget>[
+                ///MARK ---:
                 AnnotatedRegion<SystemUiOverlayStyle>(
                   value: SystemUiOverlayStyle.dark,
                   child: _ContactCategory(
