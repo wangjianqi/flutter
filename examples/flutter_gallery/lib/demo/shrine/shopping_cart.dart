@@ -212,12 +212,14 @@ class ShoppingCartRow extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(bottom: 16.0),
       child: Row(
+        ///MARK ---:ValueKey
         key: ValueKey<int>(product.id),
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           SizedBox(
             width: _leftColumnWidth,
             child: IconButton(
+              ///MARK ---:删除图标
               icon: const Icon(Icons.remove_circle_outline),
               onPressed: onPressed,
             ),
@@ -232,6 +234,7 @@ class ShoppingCartRow extends StatelessWidget {
                     children: <Widget>[
                       Image.asset(
                         product.assetName,
+                        ///从package加载
                         package: product.assetPackage,
                         fit: BoxFit.cover,
                         width: 75.0,
@@ -247,6 +250,7 @@ class ShoppingCartRow extends StatelessWidget {
                                 Expanded(
                                   child: Text('Quantity: $quantity'),
                                 ),
+                                ///价格
                                 Text('x ${formatter.format(product.price)}'),
                               ],
                             ),
@@ -262,6 +266,7 @@ class ShoppingCartRow extends StatelessWidget {
                   const SizedBox(height: 16.0),
                   const Divider(
                     color: kShrineBrown900,
+                    ///MARK ---:设置高度
                     height: 10.0,
                   ),
                 ],

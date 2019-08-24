@@ -25,6 +25,7 @@ import 'package:flutter_gallery/demo/shrine/model/product.dart';
 import 'package:flutter_gallery/demo/shrine/shopping_cart.dart';
 
 // These curves define the emphasized easing curve.
+///MARK ---:曲线
 const Cubic _kAccelerateCurve = Cubic(0.548, 0.0, 0.757, 0.464);
 const Cubic _kDecelerateCurve = Cubic(0.23, 0.94, 0.41, 1.0);
 // The time at which the accelerate and decelerate curves switch off
@@ -39,6 +40,7 @@ const double _kWidthForCartIcon = 64.0;
 
 class ExpandingBottomSheet extends StatefulWidget {
   const ExpandingBottomSheet({Key key, @required this.hideController})
+  ///不能为空
       : assert(hideController != null),
         super(key: key);
 
@@ -47,6 +49,7 @@ class ExpandingBottomSheet extends StatefulWidget {
   @override
   _ExpandingBottomSheetState createState() => _ExpandingBottomSheetState();
 
+  ///MARK ---:
   static _ExpandingBottomSheetState of(BuildContext context, {bool isNullOk = false}) {
     assert(isNullOk != null);
     assert(context != null);
@@ -116,6 +119,7 @@ double _getPeakPoint({double begin, double end}) {
 }
 
 class _ExpandingBottomSheetState extends State<ExpandingBottomSheet> with TickerProviderStateMixin {
+  ///MARK ---:生成key
   final GlobalKey _expandingBottomSheetKey = GlobalKey(debugLabel: 'Expanding bottom sheet');
 
   // The width of the Material, calculated by _widthFor() & based on the number
@@ -255,6 +259,7 @@ class _ExpandingBottomSheetState extends State<ExpandingBottomSheet> with Ticker
   }
 
   // Returns true if the cart is open or opening and false otherwise.
+  ///动画结束
   bool get _isOpen {
     final AnimationStatus status = _controller.status;
     return status == AnimationStatus.completed || status == AnimationStatus.forward;
@@ -391,6 +396,7 @@ class _ExpandingBottomSheetState extends State<ExpandingBottomSheet> with Ticker
 
   @override
   Widget build(BuildContext context) {
+    ///MARK ---:size动画
     return AnimatedSize(
       key: _expandingBottomSheetKey,
       duration: const Duration(milliseconds: 225),

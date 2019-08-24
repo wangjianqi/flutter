@@ -43,6 +43,7 @@ class PestoFavorites extends StatelessWidget {
   }
 }
 
+///MARK ---:继承TextStyle
 class PestoStyle extends TextStyle {
   const PestoStyle({
     double fontSize = 12.0,
@@ -82,6 +83,7 @@ class _RecipeGridPageState extends State<RecipeGridPage> {
       data: _kTheme.copyWith(platform: Theme.of(context).platform),
       child: Scaffold(
         key: scaffoldKey,
+        ///悬浮按钮
         floatingActionButton: FloatingActionButton(
           child: const Icon(Icons.edit),
           onPressed: () {
@@ -94,6 +96,7 @@ class _RecipeGridPageState extends State<RecipeGridPage> {
           semanticChildCount: widget.recipes.length,
           slivers: <Widget>[
             _buildAppBar(context, statusBarHeight),
+            ///sliverGrid
             _buildBody(context, statusBarHeight),
           ],
         ),
@@ -121,6 +124,7 @@ class _RecipeGridPageState extends State<RecipeGridPage> {
           final Size size = constraints.biggest;
           final double appBarHeight = size.height - statusBarHeight;
           final double t = (appBarHeight - kToolbarHeight) / (_kAppBarHeight - kToolbarHeight);
+          ///MARK ---:
           final double extraPadding = Tween<double>(begin: 10.0, end: 24.0).transform(t);
           final double logoHeight = appBarHeight - 1.5 * extraPadding;
           return Padding(
@@ -156,6 +160,7 @@ class _RecipeGridPageState extends State<RecipeGridPage> {
         delegate: SliverChildBuilderDelegate(
           (BuildContext context, int index) {
             final Recipe recipe = widget.recipes[index];
+            ///card
             return RecipeCard(
               recipe: recipe,
               onTap: () { showRecipePage(context, recipe); },
@@ -203,6 +208,7 @@ class _PestoLogoState extends State<PestoLogo> {
   static const double kLogoWidth = 220.0;
   static const double kImageHeight = 108.0;
   static const double kTextHeight = 48.0;
+
   final TextStyle titleStyle = const PestoStyle(fontSize: kTextHeight, fontWeight: FontWeight.w900, color: Colors.white, letterSpacing: 3.0);
   final RectTween _textRectTween = RectTween(
     begin: Rect.fromLTWH(0.0, kLogoHeight, kLogoWidth, kTextHeight),
@@ -219,6 +225,7 @@ class _PestoLogoState extends State<PestoLogo> {
     return Semantics(
       namesRoute: true,
       child: Transform(
+        ///scale
         transform: Matrix4.identity()..scale(widget.height / kLogoHeight),
         alignment: Alignment.topCenter,
         child: SizedBox(
@@ -360,6 +367,7 @@ class _RecipePageState extends State<RecipePage> {
                 expandedHeight: appBarHeight - _kFabHalfSize,
                 backgroundColor: Colors.transparent,
                 actions: <Widget>[
+                  ///popup
                   PopupMenuButton<String>(
                     onSelected: (String item) { },
                     itemBuilder: (BuildContext context) => <PopupMenuItem<String>>[
@@ -370,6 +378,7 @@ class _RecipePageState extends State<RecipePage> {
                     ],
                   ),
                 ],
+                ///背景色
                 flexibleSpace: const FlexibleSpaceBar(
                   background: DecoratedBox(
                     decoration: BoxDecoration(
@@ -382,6 +391,7 @@ class _RecipePageState extends State<RecipePage> {
                   ),
                 ),
               ),
+              ///MARK ---:SliverToBox
               SliverToBoxAdapter(
                 child: Stack(
                   children: <Widget>[
@@ -392,6 +402,7 @@ class _RecipePageState extends State<RecipePage> {
                     ),
                     Positioned(
                       right: 16.0,
+                      ///收藏
                       child: FloatingActionButton(
                         child: Icon(isFavorite ? Icons.favorite : Icons.favorite_border),
                         onPressed: _toggleFavorite,

@@ -83,6 +83,7 @@ class AppStateModel extends Model {
   }
 
   // Removes an item from the cart.
+  ///删除
   void removeItemFromCart(int productId) {
     if (_productsInCart.containsKey(productId)) {
       if (_productsInCart[productId] == 1) {
