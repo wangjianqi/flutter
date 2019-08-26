@@ -66,11 +66,13 @@ class ScrollableTabsDemoState extends State<ScrollableTabsDemo> with SingleTicke
   }
 
   Decoration getIndicator() {
+    ///指示线样式
     if (!_customIndicator)
       return const UnderlineTabIndicator();
 
     switch(_demoStyle) {
       case TabsDemoStyle.iconsAndText:
+        ///+
         return ShapeDecoration(
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(4.0)),
@@ -179,6 +181,7 @@ class ScrollableTabsDemoState extends State<ScrollableTabsDemo> with SingleTicke
             top: false,
             bottom: false,
             child: Container(
+              ///设置key
               key: ObjectKey(page.icon),
               padding: const EdgeInsets.all(12.0),
               child: Card(

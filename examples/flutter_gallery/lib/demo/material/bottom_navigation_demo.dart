@@ -36,6 +36,7 @@ class NavigationIconView {
   final String _title;
   final BottomNavigationBarItem item;
   final AnimationController controller;
+  ///动画
   Animation<double> _animation;
 
   FadeTransition transition(BottomNavigationBarType type, BuildContext context) {
@@ -73,6 +74,7 @@ class NavigationIconView {
   }
 }
 
+///自定义图片
 class CustomIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -86,6 +88,7 @@ class CustomIcon extends StatelessWidget {
   }
 }
 
+///自定义
 class CustomInactiveIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -158,6 +161,7 @@ class _BottomNavigationDemoState extends State<BottomNavigationDemo>
 
   @override
   void dispose() {
+    ///销毁
     for (NavigationIconView view in _navigationViews)
       view.controller.dispose();
     super.dispose();
@@ -170,6 +174,7 @@ class _BottomNavigationDemoState extends State<BottomNavigationDemo>
       transitions.add(view.transition(_type, context));
 
     // We want to have the newly animating (fading in) views on top.
+    ///排序
     transitions.sort((FadeTransition a, FadeTransition b) {
       final Animation<double> aAnimation = a.opacity;
       final Animation<double> bAnimation = b.opacity;
@@ -183,6 +188,7 @@ class _BottomNavigationDemoState extends State<BottomNavigationDemo>
 
   @override
   Widget build(BuildContext context) {
+    ///底部导航条
     final BottomNavigationBar botNavBar = BottomNavigationBar(
       items: _navigationViews
           .map<BottomNavigationBarItem>((NavigationIconView navigationView) => navigationView.item)

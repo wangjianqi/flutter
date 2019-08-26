@@ -60,12 +60,14 @@ class _PasswordFieldState extends State<PasswordField> {
       maxLength: 8,
       onSaved: widget.onSaved,
       validator: widget.validator,
+      ///提交
       onFieldSubmitted: widget.onFieldSubmitted,
       decoration: InputDecoration(
         border: const UnderlineInputBorder(),
         filled: true,
         hintText: widget.hintText,
         labelText: widget.labelText,
+        ///提示
         helperText: widget.helperText,
         suffixIcon: GestureDetector(
           dragStartBehavior: DragStartBehavior.down,
@@ -112,12 +114,14 @@ class TextFormFieldDemoState extends State<TextFormFieldDemo> {
     }
   }
 
+  ///字母
   String _validateName(String value) {
     _formWasEdited = true;
     if (value.isEmpty)
       return 'Name is required.';
     final RegExp nameExp = RegExp(r'^[A-Za-z ]+$');
     if (!nameExp.hasMatch(value))
+      ///底部提示的文字
       return 'Please enter only alphabetical characters.';
     return null;
   }
@@ -130,6 +134,7 @@ class TextFormFieldDemoState extends State<TextFormFieldDemo> {
     return null;
   }
 
+  ///判断密码是否相等
   String _validatePassword(String value) {
     _formWasEdited = true;
     final FormFieldState<String> passwordField = _passwordFieldKey.currentState;
@@ -140,6 +145,7 @@ class TextFormFieldDemoState extends State<TextFormFieldDemo> {
     return null;
   }
 
+  ///是否返回
   Future<bool> _warnUserAboutInvalidData() async {
     final FormState form = _formKey.currentState;
     if (form == null || !_formWasEdited || form.validate())
@@ -178,9 +184,11 @@ class TextFormFieldDemoState extends State<TextFormFieldDemo> {
       body: SafeArea(
         top: false,
         bottom: false,
+        ///form
         child: Form(
           key: _formKey,
           autovalidate: _autovalidate,
+          ///监听返回
           onWillPop: _warnUserAboutInvalidData,
           child: SingleChildScrollView(
             dragStartBehavior: DragStartBehavior.down,
@@ -190,14 +198,17 @@ class TextFormFieldDemoState extends State<TextFormFieldDemo> {
               children: <Widget>[
                 const SizedBox(height: 24.0),
                 TextFormField(
+                  ///word
                   textCapitalization: TextCapitalization.words,
                   decoration: const InputDecoration(
                     border: UnderlineInputBorder(),
                     filled: true,
                     icon: Icon(Icons.person),
                     hintText: 'What do people call you?',
+                    ///默认显示出来
                     labelText: 'Name *',
                   ),
+                  ///保存的
                   onSaved: (String value) { person.name = value; },
                   validator: _validateName,
                 ),
@@ -206,18 +217,23 @@ class TextFormFieldDemoState extends State<TextFormFieldDemo> {
                   decoration: const InputDecoration(
                     border: UnderlineInputBorder(),
                     filled: true,
+                    ///显示图标
                     icon: Icon(Icons.phone),
                     hintText: 'Where can we reach you?',
                     labelText: 'Phone Number *',
+                    ///默认显示
                     prefixText: '+1',
                   ),
                   keyboardType: TextInputType.phone,
                   onSaved: (String value) { person.phoneNumber = value; },
                   validator: _validatePhoneNumber,
                   // TextInputFormatters are applied in sequence.
+                  ///输入格式
                   inputFormatters: <TextInputFormatter> [
+                    ///只限数字
                     WhitelistingTextInputFormatter.digitsOnly,
                     // Fit the validating format.
+                    ///显示格式
                     _phoneNumberFormatter,
                   ],
                 ),
@@ -238,6 +254,7 @@ class TextFormFieldDemoState extends State<TextFormFieldDemo> {
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     hintText: 'Tell us about yourself (e.g., write down what you do or what hobbies you have)',
+                    ///提示
                     helperText: 'Keep it short, this is just a demo.',
                     labelText: 'Life story',
                   ),
@@ -268,6 +285,7 @@ class TextFormFieldDemoState extends State<TextFormFieldDemo> {
                 ),
                 const SizedBox(height: 24.0),
                 TextFormField(
+                  ///是否可用
                   enabled: person.password != null && person.password.isNotEmpty,
                   decoration: const InputDecoration(
                     border: UnderlineInputBorder(),
@@ -301,6 +319,7 @@ class TextFormFieldDemoState extends State<TextFormFieldDemo> {
 }
 
 /// Format incoming numeric text to fit the format of (###) ###-#### ##...
+/// 输入格式
 class _UsNumberTextInputFormatter extends TextInputFormatter {
   @override
   TextEditingValue formatEditUpdate(
@@ -312,11 +331,13 @@ class _UsNumberTextInputFormatter extends TextInputFormatter {
     int usedSubstringIndex = 0;
     final StringBuffer newText = StringBuffer();
     if (newTextLength >= 1) {
+      ///添加
       newText.write('(');
       if (newValue.selection.end >= 1)
         selectionIndex++;
     }
     if (newTextLength >= 4) {
+      ///添加）
       newText.write(newValue.text.substring(0, usedSubstringIndex = 3) + ') ');
       if (newValue.selection.end >= 3)
         selectionIndex += 2;
@@ -327,6 +348,7 @@ class _UsNumberTextInputFormatter extends TextInputFormatter {
         selectionIndex++;
     }
     if (newTextLength >= 11) {
+      ///添加空格
       newText.write(newValue.text.substring(6, usedSubstringIndex = 10) + ' ');
       if (newValue.selection.end >= 10)
         selectionIndex++;

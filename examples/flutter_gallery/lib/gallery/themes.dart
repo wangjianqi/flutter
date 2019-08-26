@@ -11,6 +11,7 @@ class GalleryTheme {
   final ThemeData data;
 }
 
+///主题
 final GalleryTheme kDarkGalleryTheme = GalleryTheme._('Dark', _buildDarkTheme());
 final GalleryTheme kLightGalleryTheme = GalleryTheme._('Light', _buildLightTheme());
 

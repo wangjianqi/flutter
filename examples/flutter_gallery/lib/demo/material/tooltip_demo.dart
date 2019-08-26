@@ -17,6 +17,7 @@ class TooltipDemo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ///主题
     final ThemeData theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
@@ -34,6 +35,7 @@ class TooltipDemo extends StatelessWidget {
                 Row(
                   children: <Widget>[
                     Text('Long press the ', style: theme.textTheme.subhead),
+                    ///直接使用toolTip
                     Tooltip(
                       message: 'call icon',
                       child: Icon(
@@ -52,6 +54,7 @@ class TooltipDemo extends StatelessWidget {
                     color: theme.iconTheme.color,
                     tooltip: 'Place a phone call',
                     onPressed: () {
+                      ///底部SnackBar
                       Scaffold.of(context).showSnackBar(const SnackBar(
                          content: Text('That was an ordinary tap.'),
                       ));
@@ -59,6 +62,7 @@ class TooltipDemo extends StatelessWidget {
                   ),
                 ),
               ]
+              ///全部添加Padding
               .map<Widget>((Widget widget) {
                 return Padding(
                   padding: const EdgeInsets.only(top: 16.0, left: 16.0, right: 16.0),

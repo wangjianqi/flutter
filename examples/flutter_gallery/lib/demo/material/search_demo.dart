@@ -32,6 +32,7 @@ class _SearchDemoState extends State<SearchDemo> {
             progress: _delegate.transitionAnimation,
           ),
           onPressed: () {
+            ///打开
             _scaffoldKey.currentState.openDrawer();
           },
         ),
@@ -95,6 +96,7 @@ class _SearchDemoState extends State<SearchDemo> {
           ],
         ),
       ),
+      ///floatingButton
       floatingActionButton: FloatingActionButton.extended(
         tooltip: 'Back', // Tests depend on this label to exit the demo.
         onPressed: () {
@@ -133,10 +135,13 @@ class _SearchDemoState extends State<SearchDemo> {
   }
 }
 
+///搜索
 class _SearchDemoSearchDelegate extends SearchDelegate<int> {
   final List<int> _data = List<int>.generate(100001, (int i) => i).reversed.toList();
   final List<int> _history = <int>[42607, 85604, 66374, 44, 174];
 
+
+  ///leading
   @override
   Widget buildLeading(BuildContext context) {
     return IconButton(
@@ -168,6 +173,7 @@ class _SearchDemoSearchDelegate extends SearchDelegate<int> {
     );
   }
 
+  ///搜索结果
   @override
   Widget buildResults(BuildContext context) {
     final int searched = int.tryParse(query);
@@ -201,6 +207,7 @@ class _SearchDemoSearchDelegate extends SearchDelegate<int> {
     );
   }
 
+  ///
   @override
   List<Widget> buildActions(BuildContext context) {
     return <Widget>[
@@ -236,6 +243,7 @@ class _ResultCard extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
     return GestureDetector(
       onTap: () {
+        ///关闭
         searchDelegate.close(context, integer);
       },
       child: Card(

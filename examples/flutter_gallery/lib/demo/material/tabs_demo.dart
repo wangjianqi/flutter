@@ -96,6 +96,7 @@ final Map<_Page, List<_CardData>> _allPages = <_Page, List<_CardData>>{
 class _CardDataItem extends StatelessWidget {
   const _CardDataItem({ this.page, this.data });
 
+  ///高度
   static const double height = 272.0;
   final _Page page;
   final _CardData data;
@@ -150,6 +151,7 @@ class TabsDemo extends StatelessWidget {
             return <Widget>[
               SliverOverlapAbsorber(
                 handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
+                ///AppBar
                 child: SliverAppBar(
                   title: const Text('Tabs and scrolling'),
                   actions: <Widget>[MaterialDemoDocumentationButton(routeName)],
@@ -173,6 +175,7 @@ class TabsDemo extends StatelessWidget {
                 child: Builder(
                   builder: (BuildContext context) {
                     return CustomScrollView(
+                      ///设置key
                       key: PageStorageKey<_Page>(page),
                       slivers: <Widget>[
                         SliverOverlapInjector(
@@ -198,6 +201,7 @@ class TabsDemo extends StatelessWidget {
                                   ),
                                 );
                               },
+                              ///count
                               childCount: _allPages[page].length,
                             ),
                           ),
