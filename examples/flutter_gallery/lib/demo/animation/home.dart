@@ -73,6 +73,7 @@ class _RenderStatusBarPaddingSliver extends RenderSliver {
   }
 }
 
+///自定义
 class _StatusBarPaddingSliver extends SingleChildRenderObjectWidget {
   const _StatusBarPaddingSliver({
     Key key,
@@ -100,6 +101,7 @@ class _StatusBarPaddingSliver extends SingleChildRenderObjectWidget {
       ..scrollFactor = scrollFactor;
   }
 
+  ///debug
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder description) {
     super.debugFillProperties(description);
@@ -258,6 +260,7 @@ class _AllSectionsLayout extends MultiChildLayoutDelegate {
   }
 }
 
+///AnimatedWidget
 class _AllSectionsView extends AnimatedWidget {
   _AllSectionsView({
     Key key,
@@ -362,6 +365,7 @@ class _AllSectionsView extends AnimatedWidget {
 // Support snapping scrolls to the midScrollOffset: the point at which the
 // app bar's height is _kAppBarMidHeight and only one section heading is
 // visible.
+///自定义
 class _SnappingScrollPhysics extends ClampingScrollPhysics {
   const _SnappingScrollPhysics({
     ScrollPhysics parent,
@@ -431,12 +435,14 @@ class _AnimationDemoHomeState extends State<AnimationDemoHome> {
   final ScrollController _scrollController = ScrollController();
   final PageController _headingPageController = PageController();
   final PageController _detailsPageController = PageController();
+  ///
   ScrollPhysics _headingScrollPhysics = const NeverScrollableScrollPhysics();
   ValueNotifier<double> selectedIndex = ValueNotifier<double>(0.0);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      ///背景色
       backgroundColor: _kAppBackgroundColor,
       body: Builder(
         // Insert an element so that _buildBody can find the PrimaryScrollController.
@@ -455,7 +461,9 @@ class _AnimationDemoHomeState extends State<AnimationDemoHome> {
   // Only enable paging for the heading when the user has scrolled to midScrollOffset.
   // Paging is enabled/disabled by setting the heading's PageView scroll physics.
   bool _handleScrollNotification(ScrollNotification notification, double midScrollOffset) {
+    ///
     if (notification.depth == 0 && notification is ScrollUpdateNotification) {
+      ///类型
       final ScrollPhysics physics = _scrollController.position.pixels >= midScrollOffset
        ? const PageScrollPhysics()
        : const NeverScrollableScrollPhysics();
@@ -491,19 +499,24 @@ class _AnimationDemoHomeState extends State<AnimationDemoHome> {
     return false;
   }
 
+  ///detail
   Iterable<Widget> _detailItemsFor(Section section) {
     final Iterable<Widget> detailItems = section.details.map<Widget>((SectionDetail detail) {
       return SectionDetailView(detail: detail);
     });
+    ///带有分割线
     return ListTile.divideTiles(context: context, tiles: detailItems);
   }
 
+  ///Iterable
   Iterable<Widget> _allHeadingItems(double maxHeight, double midScrollOffset) {
     final List<Widget> sectionCards = <Widget>[];
     for (int index = 0; index < allSections.length; index++) {
+      ///LayoutId
       sectionCards.add(LayoutId(
         id: 'card$index',
         child: GestureDetector(
+          ///opaque
           behavior: HitTestBehavior.opaque,
           child: SectionCard(section: allSections[index]),
           onTapUp: (TapUpDetails details) {
@@ -539,6 +552,7 @@ class _AnimationDemoHomeState extends State<AnimationDemoHome> {
 
   Widget _buildBody(BuildContext context) {
     final MediaQueryData mediaQueryData = MediaQuery.of(context);
+    ///状态栏高度
     final double statusBarHeight = mediaQueryData.padding.top;
     final double screenHeight = mediaQueryData.size.height;
     final double appBarMaxHeight = screenHeight - statusBarHeight;
@@ -546,13 +560,16 @@ class _AnimationDemoHomeState extends State<AnimationDemoHome> {
     // The scroll offset that reveals the appBarMidHeight appbar.
     final double appBarMidScrollOffset = statusBarHeight + appBarMaxHeight - _kAppBarMidHeight;
 
+    ///
     return SizedBox.expand(
       child: Stack(
         children: <Widget>[
+          ///监听滑动
           NotificationListener<ScrollNotification>(
             onNotification: (ScrollNotification notification) {
               return _handleScrollNotification(notification, appBarMidScrollOffset);
             },
+            ///CustomScrollView
             child: CustomScrollView(
               controller: _scrollController,
               physics: _SnappingScrollPhysics(midScrollOffset: appBarMidScrollOffset),
@@ -592,6 +609,7 @@ class _AnimationDemoHomeState extends State<AnimationDemoHome> {
                         controller: _detailsPageController,
                         children: allSections.map<Widget>((Section section) {
                           return Column(
+                            ///stretch
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: _detailItemsFor(section).toList(),
                           );
@@ -603,6 +621,8 @@ class _AnimationDemoHomeState extends State<AnimationDemoHome> {
               ],
             ),
           ),
+
+          ///返回按钮：固定不变
           Positioned(
             top: statusBarHeight,
             left: 0.0,
@@ -612,6 +632,7 @@ class _AnimationDemoHomeState extends State<AnimationDemoHome> {
                 top: false,
                 bottom: false,
                 child: IconButton(
+                  ///backIcon
                   icon: const BackButtonIcon(),
                   tooltip: 'Back',
                   onPressed: () {

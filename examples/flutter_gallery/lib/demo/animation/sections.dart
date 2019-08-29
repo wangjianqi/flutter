@@ -42,8 +42,10 @@ class Section {
   final Color rightColor;
   final List<SectionDetail> details;
 
+  ///Object
   @override
   bool operator==(Object other) {
+    ///is!
     if (other is! Section)
       return false;
     final Section otherSection = other;

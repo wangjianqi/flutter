@@ -36,6 +36,7 @@ class SectionCard extends StatelessWidget {
           section.backgroundAsset,
           package: section.backgroundAssetPackage,
           color: const Color.fromRGBO(255, 255, 255, 0.075),
+          ///混合模式
           colorBlendMode: BlendMode.modulate,
           fit: BoxFit.cover,
         ),
@@ -129,12 +130,14 @@ class SectionDetailView extends StatelessWidget {
     final Widget image = DecoratedBox(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(6.0),
+        ///image
         image: DecorationImage(
           image: AssetImage(
             detail.imageAsset,
             package: detail.imageAssetPackage,
           ),
           fit: BoxFit.cover,
+          ///alignment
           alignment: Alignment.center,
         ),
       ),

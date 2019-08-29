@@ -85,6 +85,7 @@ class FruitPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ///TextTheme
     final TextTheme textTheme = Theme.of(context).primaryTextTheme;
 
     return SingleChildScrollView(

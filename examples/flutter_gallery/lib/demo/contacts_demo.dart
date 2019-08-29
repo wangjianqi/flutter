@@ -45,7 +45,7 @@ class _ContactCategory extends StatelessWidget {
 
 class _ContactItem extends StatelessWidget {
   _ContactItem({ Key key, this.icon, this.lines, this.tooltip, this.onPressed })
-  ///asset
+  ///assert
       : assert(lines.length > 1),
         super(key: key);
 
@@ -59,6 +59,7 @@ class _ContactItem extends StatelessWidget {
     final ThemeData themeData = Theme.of(context);
     ///MARK ---:sublist
     final List<Widget> columnChildren = lines.sublist(0, lines.length - 1).map<Widget>((String line) => Text(line)).toList();
+    ///last
     columnChildren.add(Text(lines.last, style: themeData.textTheme.caption));
 
     final List<Widget> rowChildren = <Widget>[
@@ -100,6 +101,7 @@ class ContactsDemo extends StatefulWidget {
   ContactsDemoState createState() => ContactsDemoState();
 }
 
+///
 enum AppBarBehavior { normal, pinned, floating, snapping }
 
 class ContactsDemoState extends State<ContactsDemo> {
@@ -132,6 +134,7 @@ class ContactsDemoState extends State<ContactsDemo> {
               ///滑动的效果
               snap: _appBarBehavior == AppBarBehavior.snapping,
               actions: <Widget>[
+                ///edit
                 IconButton(
                   icon: const Icon(Icons.create),
                   tooltip: 'Edit',
@@ -170,7 +173,7 @@ class ContactsDemoState extends State<ContactsDemo> {
                   ],
                 ),
               ],
-              ///MARK ---:space
+              ///MARK ---:spaceBar
               flexibleSpace: FlexibleSpaceBar(
                 title: const Text('Ali Connors'),
                 background: Stack(
@@ -203,7 +206,7 @@ class ContactsDemoState extends State<ContactsDemo> {
             ///MARK ---:SliverList
             SliverList(
               delegate: SliverChildListDelegate(<Widget>[
-                ///MARK ---:
+                ///MARK ---:(注释)
                 AnnotatedRegion<SystemUiOverlayStyle>(
                   value: SystemUiOverlayStyle.dark,
                   child: _ContactCategory(
