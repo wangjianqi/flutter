@@ -31,6 +31,7 @@ class _BottomAppBarDemoState extends State<BottomAppBarDemo> {
   static const _ChoiceValue<Widget> kCircularFab = _ChoiceValue<Widget>(
     title: 'Circular',
     label: 'circular floating action button',
+    ///Widget
     value: FloatingActionButton(
       onPressed: _showSnackbar,
       child: Icon(Icons.add, semanticLabel: 'Action'),
@@ -206,6 +207,7 @@ class _BottomAppBarDemoState extends State<BottomAppBarDemo> {
   }
 }
 
+///泛型
 class _ChoiceValue<T> {
   const _ChoiceValue({ this.value, this.title, this.label });
 
@@ -229,6 +231,7 @@ class _RadioItem<T> extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
     return Container(
       height: 56.0,
+      ///start
       padding: const EdgeInsetsDirectional.only(start: 16.0),
       alignment: AlignmentDirectional.centerStart,
       child: MergeSemantics(
@@ -245,6 +248,7 @@ class _RadioItem<T> extends StatelessWidget {
                 button: true,
                 label: value.label,
                 child: GestureDetector(
+                  ///opaque
                   behavior: HitTestBehavior.opaque,
                   onTap: () {
                     onChanged(value);
@@ -282,6 +286,7 @@ class _ColorsItem extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: colors.map<Widget>((_NamedColor namedColor) {
+        ///Raw
         return RawMaterialButton(
           onPressed: () {
             onChanged(namedColor.color);
@@ -291,6 +296,7 @@ class _ColorsItem extends StatelessWidget {
             height: 32.0,
           ),
           fillColor: namedColor.color,
+          ///CircleBorder
           shape: CircleBorder(
             side: BorderSide(
               color: namedColor.color == selectedColor ? Colors.black : const Color(0xFFD5D7DA),
@@ -432,6 +438,7 @@ class _DiamondFab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ///Material
     return Material(
       shape: const _DiamondBorder(),
       color: Colors.orange,
@@ -489,6 +496,7 @@ class _DiamondNotchedRectangle implements NotchedShape {
   }
 }
 
+///形状
 class _DiamondBorder extends ShapeBorder {
   const _DiamondBorder();
 

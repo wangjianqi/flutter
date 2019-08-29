@@ -131,10 +131,10 @@ class _LiveWidgetController extends LiveWidgetController {
     return finder;
   }
 
-  @override
+  /*@override
   Future<void> tap(Finder finder, { int pointer }) async {
     await super.tap(await _waitForElement(finder), pointer: pointer);
-  }
+  }*/
 
   Future<void> scrollIntoView(Finder finder, {double alignment}) async {
     final Finder target = await _waitForElement(finder);
