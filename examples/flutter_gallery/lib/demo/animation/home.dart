@@ -73,7 +73,7 @@ class _RenderStatusBarPaddingSliver extends RenderSliver {
   }
 }
 
-///自定义
+///自定义状态栏
 class _StatusBarPaddingSliver extends SingleChildRenderObjectWidget {
   const _StatusBarPaddingSliver({
     Key key,
@@ -121,8 +121,10 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
   final double maxHeight;
   final Widget child;
 
+  ///最小高度
   @override
   double get minExtent => minHeight;
+  ///最大高度
   @override
   double get maxExtent => math.max(maxHeight, minHeight);
 
@@ -131,6 +133,7 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
     return SizedBox.expand(child: child);
   }
 
+  ///rebuild
   @override
   bool shouldRebuild(_SliverAppBarDelegate oldDelegate) {
     return maxHeight != oldDelegate.maxHeight
@@ -163,6 +166,8 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
 // defined by tCollapsed. As tCollapsed increases the titles spread out
 // until only one title is visible and the indicators cluster together
 // until they're all visible.
+
+///计算布局:MultiChildLayoutDelegate
 class _AllSectionsLayout extends MultiChildLayoutDelegate {
   _AllSectionsLayout({
     this.translation,
@@ -344,6 +349,7 @@ class _AllSectionsView extends AnimatedWidget {
       ));
     }
 
+    ///CustomMultiChildLayout
     return CustomMultiChildLayout(
       delegate: _AllSectionsLayout(
         translation: Alignment((selectedIndex.value - sectionIndex) * 2.0 - 1.0, -1.0),
@@ -433,17 +439,21 @@ class AnimationDemoHome extends StatefulWidget {
 
 class _AnimationDemoHomeState extends State<AnimationDemoHome> {
   final ScrollController _scrollController = ScrollController();
+  ///PageView
   final PageController _headingPageController = PageController();
+  ///详情的PageView
   final PageController _detailsPageController = PageController();
   ///
   ScrollPhysics _headingScrollPhysics = const NeverScrollableScrollPhysics();
+  ///记录滑动的index
   ValueNotifier<double> selectedIndex = ValueNotifier<double>(0.0);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      ///背景色
+      ///背景色：设置整体：相当于View的颜色
       backgroundColor: _kAppBackgroundColor,
+      ///Builder
       body: Builder(
         // Insert an element so that _buildBody can find the PrimaryScrollController.
         builder: _buildBody,
@@ -490,10 +500,13 @@ class _AnimationDemoHomeState extends State<AnimationDemoHome> {
     }
   }
 
+  ///横向滑动
   bool _handlePageNotification(ScrollNotification notification, PageController leader, PageController follower) {
     if (notification.depth == 0 && notification is ScrollUpdateNotification) {
+      ///当前页
       selectedIndex.value = leader.page;
       if (follower.page != leader.page)
+        ///偏移
         follower.position.jumpToWithoutSettling(leader.position.pixels); // ignore: deprecated_member_use
     }
     return false;
@@ -509,6 +522,7 @@ class _AnimationDemoHomeState extends State<AnimationDemoHome> {
   }
 
   ///Iterable
+  ///heading
   Iterable<Widget> _allHeadingItems(double maxHeight, double midScrollOffset) {
     final List<Widget> sectionCards = <Widget>[];
     for (int index = 0; index < allSections.length; index++) {
@@ -519,6 +533,7 @@ class _AnimationDemoHomeState extends State<AnimationDemoHome> {
           ///opaque
           behavior: HitTestBehavior.opaque,
           child: SectionCard(section: allSections[index]),
+          ///点击手势
           onTapUp: (TapUpDetails details) {
             final double xOffset = details.globalPosition.dx;
             setState(() {
@@ -550,11 +565,15 @@ class _AnimationDemoHomeState extends State<AnimationDemoHome> {
     return headings;
   }
 
+
+
   Widget _buildBody(BuildContext context) {
     final MediaQueryData mediaQueryData = MediaQuery.of(context);
     ///状态栏高度
     final double statusBarHeight = mediaQueryData.padding.top;
+    ///高度
     final double screenHeight = mediaQueryData.size.height;
+    ///导航栏高度
     final double appBarMaxHeight = screenHeight - statusBarHeight;
 
     // The scroll offset that reveals the appBarMidHeight appbar.
@@ -575,17 +594,19 @@ class _AnimationDemoHomeState extends State<AnimationDemoHome> {
               physics: _SnappingScrollPhysics(midScrollOffset: appBarMidScrollOffset),
               slivers: <Widget>[
                 // Start out below the status bar, gradually move to the top of the screen.
+                ///状态栏
                 _StatusBarPaddingSliver(
                   maxHeight: statusBarHeight,
                   scrollFactor: 7.0,
                 ),
-                // Section Headings
+                /// Section Headings:高度正好是：height-statusHeight
                 SliverPersistentHeader(
                   pinned: true,
                   delegate: _SliverAppBarDelegate(
                     minHeight: _kAppBarMinHeight,
                     maxHeight: appBarMaxHeight,
                     child: NotificationListener<ScrollNotification>(
+                      ///监听横向滑动
                       onNotification: (ScrollNotification notification) {
                         return _handlePageNotification(notification, _headingPageController, _detailsPageController);
                       },
@@ -597,7 +618,7 @@ class _AnimationDemoHomeState extends State<AnimationDemoHome> {
                     ),
                   ),
                 ),
-                // Details
+                /// Details:详情
                 SliverToBoxAdapter(
                   child: SizedBox(
                     height: 610.0,

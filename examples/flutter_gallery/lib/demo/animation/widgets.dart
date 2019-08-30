@@ -36,7 +36,7 @@ class SectionCard extends StatelessWidget {
           section.backgroundAsset,
           package: section.backgroundAssetPackage,
           color: const Color.fromRGBO(255, 255, 255, 0.075),
-          ///混合模式
+          ///混合模式:图片和背景色显示到一起
           colorBlendMode: BlendMode.modulate,
           fit: BoxFit.cover,
         ),
@@ -89,6 +89,7 @@ class SectionTitle extends StatelessWidget {
                 top: 4.0,
                 child: Text(section.title, style: sectionTitleShadowStyle),
               ),
+              ///标题
               Text(section.title, style: sectionTitleStyle),
             ],
           ),
@@ -99,6 +100,7 @@ class SectionTitle extends StatelessWidget {
 }
 
 // Small horizontal bar that indicates the selected section.
+///Indicator
 class SectionIndicator extends StatelessWidget {
   const SectionIndicator({ Key key, this.opacity = 1.0 }) : super(key: key);
 
