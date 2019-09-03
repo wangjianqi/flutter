@@ -32,6 +32,7 @@ class GalleryApp extends StatefulWidget {
     this.testMode = false,
   }) : super(key: key);
 
+  ///升级
   final UpdateUrlFetcher updateUrlFetcher;
   final bool enablePerformanceOverlay;
   final bool enableRasterCacheImagesCheckerboard;
@@ -134,6 +135,7 @@ class _GalleryAppState extends State<GalleryApp> {
       );
     }
 
+    ///ScopedModel
     return ScopedModel<AppStateModel>(
       model: model,
       child: MaterialApp(

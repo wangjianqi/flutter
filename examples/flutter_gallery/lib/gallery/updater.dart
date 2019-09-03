@@ -22,6 +22,7 @@ class Updater extends StatefulWidget {
   State createState() => UpdaterState();
 }
 
+///升级
 class UpdaterState extends State<Updater> {
   @override
   void initState() {
@@ -40,8 +41,10 @@ class UpdaterState extends State<Updater> {
 
     final String updateUrl = await widget.updateUrlFetcher();
     if (updateUrl != null) {
+      ///升级弹框
       final bool wantsUpdate = await showDialog<bool>(context: context, builder: _buildDialog);
       if (wantsUpdate != null && wantsUpdate)
+        ///升级
         launch(updateUrl);
     }
   }

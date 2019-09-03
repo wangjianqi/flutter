@@ -9,6 +9,8 @@ import 'package:flutter/material.dart';
 
 import 'gallery/app.dart';
 
+Future<String> fetcher() async => 'http';
+
 void main() {
-  runApp(const GalleryApp());
+  runApp(const GalleryApp(updateUrlFetcher: fetcher));
 }

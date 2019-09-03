@@ -332,6 +332,7 @@ class _GalleryHomeState extends State<GalleryHome> with SingleTickerProviderStat
 
     Widget home = Scaffold(
       key: _scaffoldKey,
+      ///背景色
       backgroundColor: isDark ? _kFlutterBlue : theme.primaryColor,
       body: SafeArea(
         bottom: false,
@@ -342,6 +343,7 @@ class _GalleryHomeState extends State<GalleryHome> with SingleTickerProviderStat
               setState(() => _category = null);
               return Future<bool>.value(false);
             }
+            ///类型
             return Future<bool>.value(true);
           },
           child: Backdrop(
@@ -359,6 +361,7 @@ class _GalleryHomeState extends State<GalleryHome> with SingleTickerProviderStat
                   onPressed: () => setState(() => _category = null),
                 ),
             ),
+            ///标题
             frontTitle: AnimatedSwitcher(
               duration: _kFrontLayerSwitchDuration,
               child: _category == null
@@ -370,6 +373,7 @@ class _GalleryHomeState extends State<GalleryHome> with SingleTickerProviderStat
               duration: _kFrontLayerSwitchDuration,
               switchOutCurve: switchOutCurve,
               switchInCurve: switchInCurve,
+              ///默认
               layoutBuilder: centerHome ? _centerHomeLayout : _topHomeLayout,
               child: _category != null
                 ? _DemosPage(_category)
@@ -405,6 +409,7 @@ class _GalleryHomeState extends State<GalleryHome> with SingleTickerProviderStat
         ],
       );
     }
+    ///
     home = AnnotatedRegion<SystemUiOverlayStyle>(
       child: home,
       value: SystemUiOverlayStyle.light,
