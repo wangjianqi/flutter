@@ -119,6 +119,7 @@ class _BooleanItem extends StatelessWidget {
 
   final String title;
   final bool value;
+  ///changed
   final ValueChanged<bool> onChanged;
   // [switchKey] is used for accessing the switch from driver tests.
   final Key switchKey;
@@ -451,6 +452,7 @@ class GalleryOptionsPage extends StatelessWidget {
           _ThemeItem(options, onOptionsChanged),
           _TextScaleFactorItem(options, onOptionsChanged),
           _TextDirectionItem(options, onOptionsChanged),
+          ///动画时间
           _TimeDilationItem(options, onOptionsChanged),
           const Divider(),
           const _Heading('Platform mechanics'),

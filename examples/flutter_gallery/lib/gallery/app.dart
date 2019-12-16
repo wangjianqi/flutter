@@ -70,6 +70,7 @@ class _GalleryAppState extends State<GalleryApp> {
       timeDilation: timeDilation,
       platform: defaultTargetPlatform,
     );
+
     ///加载数据
     model = AppStateModel()..loadProducts();
   }
@@ -84,6 +85,7 @@ class _GalleryAppState extends State<GalleryApp> {
   void _handleOptionsChanged(GalleryOptions newOptions) {
     setState(() {
       if (_options.timeDilation != newOptions.timeDilation) {
+        ///销毁定时器
         _timeDilationTimer?.cancel();
         _timeDilationTimer = null;
         if (newOptions.timeDilation > 1.0) {
@@ -94,6 +96,7 @@ class _GalleryAppState extends State<GalleryApp> {
             timeDilation = newOptions.timeDilation;
           });
         } else {
+          ///动画时间变慢
           timeDilation = newOptions.timeDilation;
         }
       }
@@ -102,6 +105,7 @@ class _GalleryAppState extends State<GalleryApp> {
     });
   }
 
+  ///文本大小
   Widget _applyTextScaleFactor(Widget child) {
     return Builder(
       builder: (BuildContext context) {
@@ -122,9 +126,11 @@ class _GalleryAppState extends State<GalleryApp> {
       optionsPage: GalleryOptionsPage(
         options: _options,
         onOptionsChanged: _handleOptionsChanged,
-        onSendFeedback: widget.onSendFeedback ?? () {
-          launch('https://github.com/flutter/flutter/issues/new/choose', forceSafariVC: false);
-        },
+        onSendFeedback: widget.onSendFeedback ??
+            () {
+              launch('https://github.com/flutter/flutter/issues/new/choose',
+                  forceSafariVC: false);
+            },
       ),
     );
 
@@ -144,9 +150,13 @@ class _GalleryAppState extends State<GalleryApp> {
         color: Colors.grey,
         showPerformanceOverlay: _options.showPerformanceOverlay,
         checkerboardOffscreenLayers: _options.showOffscreenLayersCheckerboard,
-        checkerboardRasterCacheImages: _options.showRasterCacheImagesCheckerboard,
+        checkerboardRasterCacheImages:
+            _options.showRasterCacheImagesCheckerboard,
         routes: _buildRoutes(),
+
+        ///动态修改
         builder: (BuildContext context, Widget child) {
+          ///方向
           return Directionality(
             textDirection: _options.textDirection,
             child: _applyTextScaleFactor(
